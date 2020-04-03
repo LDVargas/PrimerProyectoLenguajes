@@ -1,14 +1,24 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main() {
+void sacarNumeros(char direccionArchivo[]){
+    //printf("La direccion es [%s]\n: ", direccionArchivo);
     FILE *punteroArchivo = NULL;
-    punteroArchivo = fopen("F:/Universidad/Semestre 11/Lenguajes/Proyectos/PrimerProyect/PrimerProyectoLenguajes/archivo.txt","r");
+    punteroArchivo = fopen(direccionArchivo,"r");
+    //punteroArchivo = fopen("F:/Universidad/Semestre 11/Lenguajes/Proyectos/PrimerProyect/PrimerProyectoLenguajes/archivo.txt","r");
 
     if(punteroArchivo == NULL){
         printf("No se abrio el archivo");
-        return -1;
+    }
+    else{
+        printf("Se abrio el archivo");
     }
 
     fclose(punteroArchivo);
+}
+
+int main() {
+    char  direccion[100] = "F:/Universidad/Semestre 11/Lenguajes/Proyectos/PrimerProyect/PrimerProyectoLenguajes/archivo.txt";
+    sacarNumeros(direccion);
     return 0;
 }
