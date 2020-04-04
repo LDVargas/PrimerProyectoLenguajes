@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void sacarNumeros(char direccionArchivo[]){
     //printf("La direccion es [%s]\n: ", direccionArchivo);
@@ -17,7 +18,11 @@ void sacarNumeros(char direccionArchivo[]){
     char caracter;
     while (feof(punteroArchivo)==0){
         caracter = fgetc(punteroArchivo);
-        printf("%c",caracter);
+        if(caracter=='N'){
+            printf("encontro la N");
+            break;
+        }
+        //printf("%c",caracter);
     }
 
     fclose(punteroArchivo);
