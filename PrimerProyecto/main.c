@@ -14,6 +14,12 @@ void sacarNumeros(char direccionArchivo[]){
         printf("Se abrio el archivo");
     }
 
+    char caracter;
+    while (feof(punteroArchivo)==0){
+        caracter = fgetc(punteroArchivo);
+        printf("%c",caracter);
+    }
+
     fclose(punteroArchivo);
 }
 
