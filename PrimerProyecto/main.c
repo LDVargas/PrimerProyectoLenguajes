@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <regex.h>
 
 void sacarNumeros(char direccionArchivo[]){
     //printf("La direccion es [%s]\n: ", direccionArchivo);
@@ -18,8 +19,8 @@ void sacarNumeros(char direccionArchivo[]){
     char caracter;
     while (feof(punteroArchivo)==0){
         caracter = fgetc(punteroArchivo);
-        if(caracter=='N'){
-            printf("encontro la N");
+        if(caracter=='o'){
+            printf("encontro la %c",caracter);
             break;
         }
         //printf("%c",caracter);
@@ -28,8 +29,31 @@ void sacarNumeros(char direccionArchivo[]){
     fclose(punteroArchivo);
 }
 
+void pruebaRegex() {
+    regex_t intentoRegex;
+    int prueba = regcomp(&intentoRegex, "^a[[:alnum:]]", 0);
+    //printf("%i",prueba);
+    char msgbuf[100];
+
+
+    if (prueba){
+        fprintf(stderr,"no compilo en intentoRegex\n");
+        exit(1);
+    }
+
+    prueba = regexec(&intentoRegex, "abc",0,NULL,0);
+    if(!prueba){
+        puts("se encontro");
+    } else{
+        regerror(prueba,&intentoRegex,msgbuf, sizeof(msgbuf));
+        fprintf(stderr, "regex fallo %s", msgbuf);
+        exit(1);
+    }
+}
+
 int main() {
-    char  direccion[100] = "F:/Universidad/Semestre 11/Lenguajes/Proyectos/PrimerProyect/PrimerProyectoLenguajes/archivo.txt";
-    sacarNumeros(direccion);
+    char  direccion[1000] = "E:/Universidad/Semestre 11/Lenguajes/Proyectos/PrimerProyect/PrimerProyectoLenguajes/archivo.txt";
+    //sacarNumeros(direccion);
+    pruebaRegex();
     return 0;
 }

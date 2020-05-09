@@ -6,9 +6,13 @@
 
 #IncludeRegexTransform: 
 
-F:/Universidad/Semestre 11/Lenguajes/Proyectos/PrimerProyect/PrimerProyectoLenguajes/PrimerProyecto/main.c
+E:/Universidad/Semestre 11/Lenguajes/Proyectos/PrimerProyect/PrimerProyectoLenguajes/PrimerProyecto/main.c
 stdio.h
 -
 stdlib.h
+-
+string.h
+-
+regex.h
 -
 
