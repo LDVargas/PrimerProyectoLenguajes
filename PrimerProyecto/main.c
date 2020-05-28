@@ -4,6 +4,9 @@
 #include <regex.h>
 
 void sacarNumeros(char direccionArchivo[]);
+char* escogerOperadora(char telefono[]);
+void insertarNumero(char* num, char* operadora);
+void imprimirTelefonos();
 
 struct numeroTelefonico{
     char* num;
@@ -11,16 +14,80 @@ struct numeroTelefonico{
 };
 
 struct nodoNumeros{
-    struct numeroTelefonico;
-    struct nodoNumeros *sig;
+    struct numeroTelefonico num;
+    struct nodoNumeros* sig;
 }*cabeza = NULL;
 
 
+void insertarNumero(char* num, char* operadora){
+    struct nodoNumeros* nuevoNumero;
+    nuevoNumero = (struct nodoNumeros*) malloc(sizeof(struct nodoNumeros));
+    char* temp = (char*)malloc(1);
+    strcpy(temp,num);
 
 
-void sacarNumeros(char direccionArchivo[]){
+    nuevoNumero->num.num = temp;
+    nuevoNumero->num.operadora = operadora;
+    nuevoNumero->sig = NULL;
+
+    *temp = '\0';
+
+    if(cabeza== NULL){
+        cabeza = nuevoNumero;
+    }
+    else{
+        nuevoNumero->sig = cabeza;
+        cabeza = nuevoNumero;
+    }
+}
+
+char* escogerOperadora(char telefono[]){
+    int cont = 0;
+    while(cont<8){
+        if(telefono[cont] == '2'){
+            return "Residencial";
+        }
+        else if (telefono[cont] == '8'){
+            return "Kolbi";
+        }
+        else if (telefono[cont] == '7'){
+            return "Movistar";
+        }
+        else if (telefono[cont] == '6'){
+            if(cont==0 | cont == 4 | cont==5 | cont==6 | cont==7){
+                return "Claro";
+            }
+        }
+        cont++;
+    }
+    return "Desconocido";
+}
+
+void imprimirTelefonos(){
+    struct nodoNumeros* actual = cabeza;
+    printf("************Lista de numeros************\n");
+
+    if(actual == NULL){
+        printf("Lista Vacia");
+    }
+    else{
+        while (actual!= NULL){
+            printf("Numero: %s     Operadora: %s\n", actual->num.num, actual->num.operadora);
+            printf("\n");
+            actual = actual->sig;
+        }
+
+    }
+}
+
+
+int main() {
+    char  direccion[1000] = "E:/Universidad/Semestre 11/Lenguajes/Proyectos/PrimerProyect/PrimerProyectoLenguajes/archivo2.txt";
+
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+
     FILE *punteroArchivo = NULL;
-    punteroArchivo = fopen(direccionArchivo,"r");
+    punteroArchivo = fopen(direccion,"r");
 
     if(punteroArchivo == NULL){
         printf("No se abrio el archivo");
@@ -71,8 +138,9 @@ void sacarNumeros(char direccionArchivo[]){
                 } else{
                     strcat(numTelefonico,&prueba[cont]);
                 }
+                insertarNumero(numTelefonico,escogerOperadora(numTelefonico));
                 cont = 0;
-                printf("EL numero encontrado es %s \n", numTelefonico);
+                //printf("EL numero encontrado es %s \n", numTelefonico);
                 *numTelefonico = '\0';
 
             }
@@ -82,20 +150,15 @@ void sacarNumeros(char direccionArchivo[]){
 
     }
 
-    printf("prueba");
+    //printf("prueba");
     //regfree(&regCompiled);
     fclose(punteroArchivo);
 
-
     printf("\n esto es despues del fget \n");
 
-
-}
-
-
-int main() {
-    char  direccion[1000] = "E:/Universidad/Semestre 11/Lenguajes/Proyectos/PrimerProyect/PrimerProyectoLenguajes/archivo2.txt";
-    sacarNumeros(direccion);
-    //pruebaRegex();
+    //sacarNumeros(direccion);
+    insertarNumero("86151925","Kolbi");
+    imprimirTelefonos();
+    printf("\nvueve al main");
     return 0;
 }
