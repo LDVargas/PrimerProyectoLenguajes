@@ -30,7 +30,6 @@ void insertarNumero(char* num, char* operadora){
     nuevoNumero->num.operadora = operadora;
     nuevoNumero->sig = NULL;
 
-    *temp = '\0';
 
     if(cabeza== NULL){
         cabeza = nuevoNumero;
@@ -82,15 +81,25 @@ void imprimirTelefonos(){
 
 
 int main() {
-    char  direccion[1000] = "E:/Universidad/Semestre 11/Lenguajes/Proyectos/PrimerProyect/PrimerProyectoLenguajes/archivo2.txt";
+    char  direccion[1000] = "E:/Universidad/Semestre11/Lenguajes/Proyectos/PrimerProyect/PrimerProyectoLenguajes/archivo.txt";
+
+    char direccionArchivo[1000];
+    //*direccionArchivo = '\0';
+
+
+    printf("Ingrese la direccion del archivo (Unicamente con un backslash / y sin espacios): ");
+    scanf("%s", direccionArchivo);
+
+    printf("%s",direccionArchivo);
 
     // /////////////////////////////////////////////////////////////////////////////////////////////
 
     FILE *punteroArchivo = NULL;
-    punteroArchivo = fopen(direccion,"r");
+    punteroArchivo = fopen(direccionArchivo,"r");
 
     if(punteroArchivo == NULL){
-        printf("No se abrio el archivo");
+        printf("Formato erroneo, reintente otra vez\n");
+        main();
     }
     else{
         printf("Se abrio el archivo");
@@ -159,6 +168,5 @@ int main() {
     //sacarNumeros(direccion);
     insertarNumero("86151925","Kolbi");
     imprimirTelefonos();
-    printf("\nvueve al main");
     return 0;
 }
