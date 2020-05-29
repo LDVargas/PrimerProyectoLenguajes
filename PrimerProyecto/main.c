@@ -64,10 +64,11 @@ char* escogerOperadora(char telefono[]){
 
 void imprimirTelefonos(){
     struct nodoNumeros* actual = cabeza;
-    printf("************Lista de numeros************\n");
+    printf("\n************Lista de numeros************\n");
 
     if(actual == NULL){
         printf("Lista Vacia");
+        exit(1);
     }
     else{
         while (actual!= NULL){
@@ -87,7 +88,7 @@ int main() {
     //*direccionArchivo = '\0';
 
 
-    printf("Ingrese la direccion del archivo (Unicamente con un backslash / y sin espacios): ");
+    printf("Ingrese la direccion del archivo (Unicamente con un backslash /, sin espacios y .txt): ");
     scanf("%s", direccionArchivo);
 
     printf("%s",direccionArchivo);
@@ -166,7 +167,7 @@ int main() {
     //printf("\n esto es despues del fget \n");
 
     //sacarNumeros(direccion);
-    insertarNumero("86151925","Kolbi");
+    //insertarNumero("86151925","Kolbi");
     imprimirTelefonos();
     return 0;
 }
