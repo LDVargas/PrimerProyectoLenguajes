@@ -163,7 +163,7 @@ int main() {
     //regfree(&regCompiled);
     fclose(punteroArchivo);
 
-    printf("\n esto es despues del fget \n");
+    //printf("\n esto es despues del fget \n");
 
     //sacarNumeros(direccion);
     insertarNumero("86151925","Kolbi");
